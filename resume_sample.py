@@ -28,17 +28,27 @@ class ResumeSample():
         self.idx = state_dict['idx']
         self._loop = state_dict['loop']
 
-        self.data = random.sample(range(self.size), self.size)
+        # 使用原种子
+        random.seed(self.seed)
+        self._init_data()
+
         return self
+
+    def _init_data(self):
+        if self.shuffle:
+
+            self.data = random.sample(range(self.size), self.size)
+        else:
+            self.data = list(range(self.size))
 
     def __iter__(self):
         if not self._loop:
-            if self.shuffle:
-                random.seed(self.seed)
-                self.seed += self.step
-                self.data = random.sample(range(self.size), self.size)
-            else:
-                self.data = list(range(self.size))
+            # 更新种子
+            self.seed += self.step
+
+            random.seed(self.seed)
+            self._init_data()
+
             self.idx = 0
             self._loop = True
 
