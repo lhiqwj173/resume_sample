@@ -29,6 +29,7 @@ class ResumeSample():
         self._loop = state_dict['loop']
 
         self.data = random.sample(range(self.size), self.size)
+        return self
 
     def __iter__(self):
         if not self._loop:
