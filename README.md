@@ -4,6 +4,7 @@
 
 使用方法（详见test.ipynb）：
 ```python
+import torch
 from resume_sample import ResumeSample
 
 sampler = ResumeSample(length=len(data), shuffle=True)
