@@ -57,6 +57,7 @@ class ResumeSample():
     def __next__(self):
         if self.idx >= self.size:
             self._loop = False
+            self.idx = 0
             raise StopIteration
 
         v = self.data[self.idx]
